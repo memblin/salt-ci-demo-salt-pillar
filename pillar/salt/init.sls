@@ -1,5 +1,5 @@
 
 salt:
   lookup:
-    versions:
-      bootstrap: v2024.12.09
+#    versions:
+#      bootstrap: v2024.12.09
