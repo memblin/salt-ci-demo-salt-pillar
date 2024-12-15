@@ -6,3 +6,5 @@
   'web*':
     - webserver
 
+  'salt*':
+    - salt
