@@ -8,3 +8,6 @@
 
   'salt*':
     - salt
+
+  'ghar*':
+    - ghar
