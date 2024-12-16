@@ -6,6 +6,7 @@ include:
 salt:
   lookup:
       salt_ci:
+        username: salt-ci-user
         password: |
           -----BEGIN PGP MESSAGE-----
 
