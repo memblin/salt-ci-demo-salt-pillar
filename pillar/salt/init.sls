@@ -1,3 +1,5 @@
+#!yaml|gpg
+
 include:
   - .pki
 
