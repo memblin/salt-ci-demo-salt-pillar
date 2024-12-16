@@ -23,3 +23,19 @@ salt:
           ELVyfUVcSeQMw9GSnk0pG8Yyod0=
           =GZry
           -----END PGP MESSAGE-----
+        password_hash: |
+          -----BEGIN PGP MESSAGE-----
+
+          hQGMA/J0RHCCXHb0AQwAv54TlFBfxdJnNUlQaeQaVR0BkXxWFp/Cibx5sc3FlqEw
+          GCfmkRnP7a7pto9x+nyoff7If6yWi0aL8OfEooEmOfufYOjrdJq8xWd4nP3gLvg5
+          2TYE33ambsQ3YLznwEVUtec7raByJ/4l/9zVJvtRtigHRS/1OqUMBaFeb3dB3FE2
+          EgVkSl31WeLbAiPiqp6XJvS8kQFqu4ncqSlBSkpEJvzTG4IbuIV3QnkfFfj6iq3j
+          2gnENS9BsfMw5vGtZIKsJAmMfXT+CNOWEJdn41Km9uL1mCUReR56Kqpc3BN7JXlC
+          kWdqawhTpdoSm6sDVr9iz1WuoE14kWBt3uINV+yZHqXVeTO1SwIUl57hd8GJ7Q4E
+          ieecyvRftSU/huol8MQk/50u++Y5+GY7nvz9vHXbYQlGqwrpeoNJHCj90w1aa9iQ
+          uQQN8gXi+NPp87SokftGKOewvKYUtzLq4Pj0jUDUpDea1BGwNpX8yjtz5Dp566Kj
+          btxlVAGqYYB6ZTwYzdDr0noBYAZQRBtUET4QJBaFkzTOe40IZj/7U1Z/9JO6xHlI
+          hhzHFolWLm486StMny8rN3Ow/Ru34roHO9EWc7l2CgTzEs6atsZQYZWQsVSh/RP1
+          fZ4rcgg8dTY6RtbyMC9QL3oxUCUhvmxd0dS3Eu5jp0hDaUfJXEeRmwnCxw==
+          =GULg
+          -----END PGP MESSAGE-----
