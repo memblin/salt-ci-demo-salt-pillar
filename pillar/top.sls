@@ -9,5 +9,8 @@
   'salt*':
     - salt
 
+  'salt-ci*':
+    - salt.identify.{{ grains.id | replace('.', '_') }}
+
   'ghar*':
     - ghar
