@@ -54,6 +54,23 @@ jobs:
               console.log('Problem reading validation output: ' + err);
             }
 
+            // Build a human-readable output from the validation data
+            const parsePillarValidation = (data) => {
+              const parsedData = JSON.parse(data);
+              let output = '## Pillar Changes Summary\n\n';
+              for (const [minion, changes] of Object.entries(parsedData)) {
+                output += `### ${minion}\n\n`;
+                for (const [changeType, keys] of Object.entries(changes)) {
+                  output += `#### Pillar trees ${changeType}\n\n`;
+                  keys.forEach(key => {
+                    output += `- ${key}\n`;
+                  });
+                  output += '\n';
+                }
+              }
+              return output;
+            };
+
             // Get existing comments on the PR
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
@@ -66,14 +83,11 @@ jobs:
             })
 
             // Prepare pillar validation output for comment
-            const output = `#### Salt Pillar Validation: \`${{ steps.validate.outcome }}\`
-            <details><summary>Validation Output</summary>
+            const parsedOutput = parsePillarValidation(pillar_validation);
 
-            \`\`\`\n
-            ${pillar_validation}
-            \`\`\`
+            const output = `### Salt Pillar Validation: \`${{ steps.validate.outcome }}\`
 
-            </details>
+            ${parsedOutput}
    
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Workflow: \`${{ github.workflow }}\`*`;
 
