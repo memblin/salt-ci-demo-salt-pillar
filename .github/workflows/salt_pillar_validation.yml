@@ -1,0 +1,95 @@
+---
+name: Salt CI Pillar Validation
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+    branches: ['main']
+    paths:
+      - pillar/**
+env:
+  API_BASE_URL: ${{ vars.API_BASE_URL }}
+  API_CA_CERT_PATH: ${{ vars.API_CA_CERT_PATH }}
+  API_USERNAME: ${{ vars.API_USERNAME }}
+  API_PASSWORD: ${{ secrets.API_PASSWORD }}
+  TARGET_PILLARENV: base
+  INCOMING_PILLARENV: ${{ github.ref }}
+  MINION_IDS: '["web01.local", "srv01.local" ,"salt.local", "salt-ci01.local"]'
+
+jobs:
+  salt_pillar_validation:
+    name: Salt PIllar Validation
+    runs-on: [self-hosted, salt-ci]
+    permissions:
+      contents: read
+      pull-requests: write
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./scripts
+    steps:
+
+# Do we need to checkout the repo if we're just calling
+# a different API to validate the pillar?
+
+#      - name: Checkout the repository
+#        uses: actions/checkout@v3
+#        with:
+#          fetch-depth: 0
+
+      - name: Validate Salt Pillar
+        id: validate
+        run: |
+          ./salt-ci-pillar-validation.py | tee pillar-validation.output
+
+      - name: Update Pull Request Conversation with Plan info
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            let pillar_valiation;
+            try {
+              pillar_validation = fs.readFileSync('scripts/pillar-validation.output', 'utf8');
+            } catch (err) {
+              console.log('Problem reading validation output: ' + err);
+            }
+
+            // Get existing comments on the PR
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            })
+            // See if any match our output format
+            const botComment = comments.find(comment => {
+              return comment.user.type === 'Bot' && comment.body.includes('Terraform Format and Style')
+            })
+
+            // Prepare pillar validation output for comment
+            const output = `#### Salt Pillar Validation \`${{ steps.validate.outcome }}\`
+            <details><summary>Validation Output</summary>
+
+            \`\`\`\n
+            ${pillar_validation}
+            \`\`\`
+
+            </details>
+   
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Workflow: \`${{ github.workflow }}\`*`;
+
+            // Update our comment if we have already made one; else create a new one
+            if (botComment) {
+              github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: output
+              })
+            } else {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: output
+              })
+            }
