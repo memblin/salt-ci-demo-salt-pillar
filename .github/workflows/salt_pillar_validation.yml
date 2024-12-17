@@ -62,7 +62,7 @@ jobs:
             })
             // See if any match our output format
             const botComment = comments.find(comment => {
-              return comment.user.type === 'Bot' && comment.body.includes('Salt Pillar Validation')
+              return comment.user.type === 'Bot' && comment.body.includes('Salt Pillar Validation:')
             })
 
             // Prepare pillar validation output for comment
