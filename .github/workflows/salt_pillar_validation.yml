@@ -17,7 +17,7 @@ env:
 
 jobs:
   salt_pillar_validation:
-    name: Salt PIllar Validation
+    name: Salt Pillar Validation
     runs-on: [self-hosted, salt-ci]
     permissions:
       contents: read
@@ -28,20 +28,20 @@ jobs:
         working-directory: scripts
     steps:
 
-# Do we need to checkout the repo if we're just calling
-# a different API to validate the pillar?
-
-#      - name: Checkout the repository
-#        uses: actions/checkout@v3
-#        with:
-#          fetch-depth: 0
+      # We need the scripts from our repo even if we're not building or using
+      # the source directly.
+      - name: Checkout the repository
+        id: chcekout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Validate Salt Pillar
         id: validate
         run: |
           ./salt-ci-pillar-validation.py | tee pillar-validation.output
 
-      - name: Update Pull Request Conversation with Plan info
+      - name: Update PR with validation output
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
