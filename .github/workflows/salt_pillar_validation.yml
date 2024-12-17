@@ -12,7 +12,7 @@ env:
   API_USERNAME: ${{ vars.API_USERNAME }}
   API_PASSWORD: ${{ secrets.API_PASSWORD }}
   TARGET_PILLARENV: base
-  INCOMING_PILLARENV: ${{ github.ref }}
+  INCOMING_PILLARENV: ${{ github.head_ref }}
   MINION_IDS: ${{ vars.MINION_IDS }}
 
 jobs:
