@@ -20,8 +20,8 @@ API_USERNAME = os.getenv('API_USERNAME', "salt-ci-user")
 API_PASSWORD = os.getenv('API_PASSWORD', "salt-ci-password")
 
 # Import GitHub Environment Variables
-TARGET_PILLARENV = os.getenv('TARGET_BRANCH', 'base')
-INCOMING_PILLARENV = os.getenv('INCOMING_BRANCH', 'dev.change_web_pillar')
+TARGET_PILLARENV = os.getenv('TARGET_PILLARENV', 'base')
+INCOMING_PILLARENV = os.getenv('INCOMING_PILLARENV', 'dev.change_web_pillar')
 MINION_IDS = os.getenv('MINION_IDS', '["web01.local", "srv01.local" ,"salt.local", "salt-ci01.local"]')
 
 
@@ -43,7 +43,7 @@ def main():
     """
     # Create a session object
     session = requests.Session()
-    session.verify = API_CA_CERT
+    session.verify = API_CA_CERT_PATH
 
     baseurl = API_BASE_URL
     username = API_USERNAME
