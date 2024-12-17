@@ -1,6 +1,7 @@
 #!yaml|gpg
 
 salt:
+  demo_added_key: demo_added_value
   pki:
     ssl_certificate: |
         -----BEGIN CERTIFICATE-----
