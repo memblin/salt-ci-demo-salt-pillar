@@ -13,7 +13,7 @@ env:
   API_PASSWORD: ${{ secrets.API_PASSWORD }}
   TARGET_PILLARENV: base
   INCOMING_PILLARENV: ${{ github.ref }}
-  MINION_IDS: ${{ var.MINION_IDS }}
+  MINION_IDS: ${{ vars.MINION_IDS }}
 
 jobs:
   salt_pillar_validation:
