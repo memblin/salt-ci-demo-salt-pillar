@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 # Import Salt API Config Environment Variables
-API_BASE_URL = os.getenv('API_BASEURL', "https://salt-ci01.local:8000")
+API_BASE_URL = os.getenv('API_BASEURL', "https://salt-ci02.local:8000")
 API_CA_CERT_PATH = os.getenv('API_CA_CERT_PATH', "/etc/pki/ca-trust/source/anchors/internal-ca.crt")
 API_USERNAME = os.getenv('API_USERNAME', "salt-ci-user")
 API_PASSWORD = os.getenv('API_PASSWORD', "salt-ci-password")
