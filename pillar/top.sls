@@ -10,7 +10,7 @@
     - salt
 
   'salt-ci*':
-    - salt.identify.{{ grains.id | replace('.', '_') }}
+    - salt.identify.{{ grains.nodename }}
 
   'ghar*':
     - ghar
