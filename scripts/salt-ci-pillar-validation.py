@@ -94,7 +94,7 @@ def main():
         #         for pillar_path in pillar:
         #             log.info(f"Pillar Path: {pillar_path}")
 
-        print(f"{json.dumps(consolidated_api_data)}")
+        print(f"{json.dumps(consolidated_api_data, indent=4)}")
 
         # with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
         #     fh.write(f"{json.dumps(consolidated_api_data, indent=4)}")
