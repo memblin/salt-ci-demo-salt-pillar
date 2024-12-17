@@ -62,11 +62,11 @@ jobs:
             })
             // See if any match our output format
             const botComment = comments.find(comment => {
-              return comment.user.type === 'Bot' && comment.body.includes('Terraform Format and Style')
+              return comment.user.type === 'Bot' && comment.body.includes('Salt Pillar Validation')
             })
 
             // Prepare pillar validation output for comment
-            const output = `#### Salt Pillar Validation \`${{ steps.validate.outcome }}\`
+            const output = `#### Salt Pillar Validation: \`${{ steps.validate.outcome }}\`
             <details><summary>Validation Output</summary>
 
             \`\`\`\n
